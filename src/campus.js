@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {deleteCampus} from './store'
 
-const Campus = ({schools, history}) => {
+const Campus = ({schools, history, onDelete}) => {
     return (
         <ul>
             {schools.map(school=>{
@@ -10,6 +11,7 @@ const Campus = ({schools, history}) => {
                     {school.name}
                     <br/>
                     <img onClick={()=>history.push(`/campuses/${school.id}`)} src={school.imageUrl} style={{width:100,height:100}} className="img-responsive"/>
+                    <button onClick={()=>onDelete(school.id)}>X</button>
                 </li>)
             })}
         </ul>
@@ -21,6 +23,11 @@ const mapStateToProps = (state)=> {
       schools: state.campusReducer   // questions HY ??
     };
   };
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDelete: (id)=>dispatch(deleteCampus(id))
+    }
+}
 
-export default connect(mapStateToProps)(Campus)
+export default connect(mapStateToProps, mapDispatchToProps)(Campus)
 

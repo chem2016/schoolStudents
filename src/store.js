@@ -78,6 +78,20 @@ export const addStudent = (student, history) => {
     }
 }
 
+export const deleteCampus = (id) => {
+    return (dispatch) => {
+        return axios.delete(`/api/campuses/${id}`)
+            .then(()=>dispatch(fetchSchools()))
+    }
+}
+
+export const deleteStudent = (id) => {
+    return (dispatch) => {
+        return axios.delete(`/api/students/${id}`)
+            .then(()=>dispatch(fetchStudents()))
+    }
+}
+
 
 const store = createStore(reducer,applyMiddleware(thunk))
 export default store;

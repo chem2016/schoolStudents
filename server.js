@@ -67,6 +67,26 @@ app.post('/api/students', (req, res, next)=>{
         .catch(next)
 })
 
+app.delete('/api/campuses/:id', (req, res, next)=>{
+    Campus.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(()=>res.sendStatus(204))
+        .catch(next)
+})
+
+app.delete('/api/students/:id', (req, res, next)=>{
+    Student.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(()=>res.sendStatus(204))
+        .catch(next)
+})
+
 app.use((error, req, res, next)=>{
     console.log(error);
     console.log(Object.keys(error))
