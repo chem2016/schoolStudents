@@ -12,4 +12,21 @@ app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html'))
 syncAndSeed()
     .then(()=>console.log('sync data for schools and students'))
 
+app.get('/api/campus', (req, res, next)=>{
+    Campus.findAll({
+        order: [['name']]
+    })
+    .then(campus=>res.send(campus))
+    .catch(next)
+})
+
+app.get('/api/students', (req, res, next)=>{
+    Student.findAll({
+        order: [['lastName']]
+    })
+    .then(students=>res.send(students))
+    .catch(next)
+
+})
+
 app.listen(port, ()=> console.log(`listening on port ${port}`))
