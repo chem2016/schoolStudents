@@ -70,5 +70,14 @@ export const addCampus = (school, history) => {
     }
 }
 
+export const addStudent = (student, history) => {
+    return (dispatch)=>{
+        return axios.post('/api/students', student)
+            .then(()=>dispatch(fetchStudents()))
+            .then(()=>history.push('/students'))
+    }
+}
+
+
 const store = createStore(reducer,applyMiddleware(thunk))
 export default store;

@@ -17,7 +17,6 @@ class campusForm extends Component{
     onSave=(ev)=>{
         ev.preventDefault();
         const school = {...this.state}
-        console.log(school)
         this.props.onSave(school)
     }
     render(){
