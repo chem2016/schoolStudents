@@ -4,6 +4,10 @@ import {connect} from 'react-redux';
 const singleCampus = ({match, schools, students, history}) => {
     const school = schools.find(s=>s.id === match.params.id*1)
     const matchStudents = students.filter(s=>s.campusId === school.id)
+    // console.log('in single campus: match', match)
+    // if(match.params.id*1 === 5){
+    //     return<p>school does not exist!!!</p>
+    // }
     return (
         <div>
             {school ? 

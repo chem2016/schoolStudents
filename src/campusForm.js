@@ -10,6 +10,7 @@ class campusForm extends Component{
             address: '',
             imageUrl: '',
             description: '',
+            errors: []
         }
     }
 
@@ -17,13 +18,26 @@ class campusForm extends Component{
     onSave=(ev)=>{
         ev.preventDefault();
         const school = {...this.state}
+        delete school.errors
         this.props.onSave(school)
+            .catch(ex=>{
+                console.log('errors in onSave func campusForm: ', ex)
+                this.setState({errors: ex.response.data.errors})
+            })
     }
     render(){
-        const {name, address, imageUrl, description} = this.state
+        const {name, address, imageUrl, description, errors} = this.state
+        console.log('errors:', errors)
         const {onChange, onSave} = this
         return(
             <form onSubmit={onSave}>
+                {
+                    !!errors.length && (<ul className='alert alert-danger'>
+                        {
+                            errors.map((error, idx)=><li key={idx}>{error}</li>)
+                        }
+                    </ul>)
+                }
                 <input className='form-control' placeholder='name' name='name' value={name} onChange={onChange}/>
                 <input className='form-control' placeholder='address' name='address' value={address} onChange={onChange}/>
                 <input className='form-control' placeholder='imageUrl' name='imageUrl' value={imageUrl} onChange={onChange}/>

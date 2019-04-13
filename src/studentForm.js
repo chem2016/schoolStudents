@@ -11,19 +11,27 @@ class studentForm extends Component{
             email: '',
             campusId: '',
             gpa: '',
+            errors: []
         }
     }
     onChange = (ev) => this.setState({[ev.target.name]: ev.target.value})
     onSave = (ev) => {
         ev.preventDefault()
         const student = {...this.state}
+        delete student.errors
         this.props.onSave(student)
+            .catch(ex=>this.setState({errors: ex.response.data.errors}))
     }
     render(){
         const {onChange, onSave} = this
-        const {firstName, lastName, email, campusId, gpa} = this.state
+        const {firstName, lastName, email, campusId, gpa, errors} = this.state
         return(
             <form onSubmit={onSave}>
+                {
+                    !!errors.length && (<ul className='alert alert-danger'>
+                        {errors.map((error, idx)=><li key={idx}>{error}</li>)}
+                    </ul>)
+                }
                 <input className='form-control' placeholder='firstName' name='firstName' value={firstName} onChange={onChange}/>
                 <input className='form-control' placeholder='lastName' name='lastName' value={lastName} onChange={onChange}/>
                 <input className='form-control' placeholder='email' name='email' value={email} onChange={onChange}/>

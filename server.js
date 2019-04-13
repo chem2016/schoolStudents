@@ -87,8 +87,10 @@ app.delete('/api/students/:id', (req, res, next)=>{
         .catch(next)
 })
 
+
+
 app.use((error, req, res, next)=>{
-    console.log(error);
+    console.log('Errors from server: ', error);
     console.log(Object.keys(error))
     let errors = [error];
     if(error.errors){
@@ -100,5 +102,8 @@ app.use((error, req, res, next)=>{
     res.status(error.status || 500).send({errors})
 })
 
+// app.use(function(req, res) {
+//     res.send('404: The you are looking for does not exist!!!');
+//  });
 
 app.listen(port, ()=> console.log(`listening on port ${port}`))
