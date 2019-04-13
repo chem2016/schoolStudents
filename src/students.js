@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 
 const Students = ({students, history}) => {
     return (
-        <ul>
+        <ul className='list-group'>
             {students.map(student=>{
                 return (
-                    <li key={student.id} onClick={()=>history.push(`/students/${student.id}`)}>
+                    <li key={student.id} onClick={()=>history.push(`/students/${student.id}`)} className='list-group-item'>
                         {`${student.firstName} ${student.lastName}`}
                     </li>)
             })}

@@ -12,6 +12,7 @@ app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html'))
 syncAndSeed()
     .then(()=>console.log('sync data for schools and students'))
 
+app.use(express.json());
 app.get('/api/campuses', (req, res, next)=>{
     Campus.findAll({
         order: [['name']]
@@ -53,5 +54,31 @@ app.get('/api/students/:id', (req, res, next)=>{
     .then(student=>res.send(student))
     .catch(next)
 })
+
+app.post('/api/campuses', (req, res, next)=>{
+    Campus.create(req.body)
+        .then(campus=>res.send(campus))
+        .catch(next)
+})
+
+app.post('/api/students', (req, res, next)=>{
+    Student.create(req.body)
+        .then(student=>res.send(student))
+        .catch(next)
+})
+
+app.use((error, req, res, next)=>{
+    console.log(error);
+    console.log(Object.keys(error))
+    let errors = [error];
+    if(error.errors){
+        errors = error.errors.map( error => error.message);
+    }
+    else if(error.original){
+        errors = [error.original.message];
+    }
+    res.status(error.status || 500).send({errors})
+})
+
 
 app.listen(port, ()=> console.log(`listening on port ${port}`))

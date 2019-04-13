@@ -13,6 +13,9 @@ const Nav = ({location: {pathname}}) => {
         {
             to: '/students', label: 'Students'
         },
+        {
+            to: '/addCampuses', label: 'Add School'
+        }
     ]
 
     return (

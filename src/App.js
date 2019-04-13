@@ -6,6 +6,7 @@ import Campus from './campus'
 import Students from './students'
 import singleCampus from './singleCampus'
 import singleStudent from './singleStudent'
+import campusForm from './campusForm'
 import {fetchSchools, fetchStudents} from './store'
 
 class App extends Component{
@@ -24,6 +25,7 @@ class App extends Component{
                     <Route path='/students' exact component={Students}/>
                     <Route path='/campuses/:id' exact component={singleCampus}/>
                     <Route path='/students/:id' exact component={singleStudent}/>
+                    <Route path='/addCampuses' exact component={campusForm}/>
                 </Fragment>
             </Router>
         )
