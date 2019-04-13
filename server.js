@@ -87,7 +87,19 @@ app.delete('/api/students/:id', (req, res, next)=>{
         .catch(next)
 })
 
+app.put('/api/campuses/:id', (req, res, next)=>{
+    Campus.findByPk(req.params.id)
+        .then(school=>school.update(req.body))
+        .then(school=>res.send(school))
+        .catch(next)
+})
 
+app.put('/api/students/:id', (req, res, next)=>{
+    Student.findByPk(req.params.id)
+        .then(student=>student.update(req.body))
+        .then(student=>res.send(student))
+        .catch(next)
+})
 
 app.use((error, req, res, next)=>{
     console.log('Errors from server: ', error);

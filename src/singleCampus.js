@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import CampusForm from './campusForm'
 
-const singleCampus = ({match, schools, students, history}) => {
+const SingleCampus = ({match, schools, students, history}) => {
     const school = schools.find(s=>s.id === match.params.id*1)
     const matchStudents = students.filter(s=>s.campusId === school.id)
     // console.log('in single campus: match', match)
@@ -34,6 +35,7 @@ const singleCampus = ({match, schools, students, history}) => {
                 </div>
                 : <p>This school currently has no students</p>
             }
+            <div><CampusForm match={match} history={history}/></div>
         </div>
     )
 }
@@ -45,4 +47,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps)(singleCampus)
+export default connect(mapStateToProps)(SingleCampus)

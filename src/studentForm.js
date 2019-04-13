@@ -1,30 +1,50 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addStudent} from './store'
+import {addStudent, updateStudent} from './store'
 
-class studentForm extends Component{
-    constructor(){
-        super()
-        this.state = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            campusId: '',
-            gpa: '',
+class StudentForm extends Component{
+    constructor(props){
+        super(props)
+        this.state = this.stateFromStudent(this.props.student)
+    }
+
+    stateFromStudent = (student) => {
+        return {
+            firstName: student ? student.firstName : '',
+            lastName: student ? student.lastName : '',
+            email: student ? student.email : '',
+            campusId: student ? student.campusId : '',
+            gpa: student ? student.gpa : '',
             errors: []
         }
     }
+
+    componentDidUpdate(prevProps){
+        if(this.props.student && !prevProps.student){
+            this.setState(this.stateFromStudent(this.props.student))
+        }
+    }
+
     onChange = (ev) => this.setState({[ev.target.name]: ev.target.value})
     onSave = (ev) => {
         ev.preventDefault()
         const student = {...this.state}
         delete student.errors
-        this.props.onSave(student)
+        if(this.props.student){
+            student.id = this.props.student.id
+        }
+        if(student.id){
+            this.props.onUpdate(student)
+                .catch(ex=>this.setState({errors: ex.response.data.errors}))
+        }else{
+            this.props.onSave(student)
             .catch(ex=>this.setState({errors: ex.response.data.errors}))
+        }
     }
     render(){
         const {onChange, onSave} = this
         const {firstName, lastName, email, campusId, gpa, errors} = this.state
+        const updating = this.props.student
         return(
             <form onSubmit={onSave}>
                 {
@@ -38,7 +58,7 @@ class studentForm extends Component{
                 <input className='form-control' placeholder='campusId' name='campusId' value={campusId} onChange={onChange}/>
                 <input className='form-control' placeholder='gpa' name='gpa' value={gpa} onChange={onChange}/>
                 <div style={{ marginTop: '10px'}} className='btn-group'>
-                <button className='btn btn-primary' type='submit'>{ 'Create' }</button>
+                <button className='btn btn-primary' type='submit'>{ updating ? 'Edit' : 'Create' }</button>
                 </div>
             </form>
         )
@@ -48,8 +68,18 @@ class studentForm extends Component{
 
 const mapDispatchToProps = (dispatch, {history}) => {
     return {
-        onSave: (student) => dispatch(addStudent(student, history))  
+        onSave: (student) => dispatch(addStudent(student, history)),
+        onUpdate: (student) => dispatch(updateStudent(student, history))   
     }
 }
 
-export default connect(null, mapDispatchToProps)(studentForm)
+const mapStateToProps = (state, {match}) => {
+    let student;
+    student = state.studentsReducer.find(s=>s.id === match.params.id*1)
+    return {
+        students: state.studentsReducer,
+        student
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentForm)

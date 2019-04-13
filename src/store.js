@@ -42,7 +42,7 @@ const reducer = combineReducers({
     campusReducer,
     studentsReducer
 })
-// fetch methods
+// thunk methods
 export const fetchSchools = () => {
     return (dispatch) => {
         return axios.get('/api/campuses')
@@ -65,6 +65,7 @@ export const fetchStudents = () => {
 export const addCampus = (school, history) => {
     return (dispatch)=>{
         return axios.post('/api/campuses', school)
+        // return axios[ school.id ? 'put' : 'post'](`/api/schools/${school.id ? school.id : ''}`, school)
             .then(()=>dispatch(fetchSchools()))
             .then(()=>history.push('/campuses'))
     }
@@ -92,6 +93,21 @@ export const deleteStudent = (id) => {
     }
 }
 
+export const updateCampus = (school, history) => {
+    return (dispatch) => {
+        return axios.put(`/api/campuses/${school.id}`, school)
+            .then(()=>dispatch(fetchSchools()))
+            .then(()=>history.push('/campuses'))
+    }
+}
+
+export const updateStudent = (student, history) => {
+    return (dispatch) => {
+        return axios.put(`/api/students/${student.id}`, student)
+            .then(()=>dispatch(fetchStudents()))
+            .then(()=>history.push('/students'))
+    }
+}
 
 const store = createStore(reducer,applyMiddleware(thunk))
 export default store;

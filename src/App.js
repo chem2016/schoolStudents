@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 import Nav from './nav'
 import Campus from './campus'
 import Students from './students'
-import singleCampus from './singleCampus'
+import SingleCampus from './singleCampus'
 import singleStudent from './singleStudent'
-import campusForm from './campusForm'
-import studentForm from './studentForm'
+import CampusForm from './campusForm'
+import StudentForm from './studentForm'
 import {fetchSchools, fetchStudents} from './store'
 
 class App extends Component{
@@ -24,10 +24,10 @@ class App extends Component{
                     <Route path='/' component={Nav}/>
                     <Route path='/campuses' exact component={Campus}/>
                     <Route path='/students' exact component={Students}/>
-                    <Route path='/campuses/:id' exact component={singleCampus}/>
-                    <Route path='/students/:id' exact component={singleStudent}/>
-                    <Route path='/addCampuses' exact component={campusForm}/>
-                    <Route path='/addStudents' exact component={studentForm}/>
+                    <Route path='/campuses/:id' render={({match, history})=>(<SingleCampus match={match} history={history}/>)}/>
+                    <Route path='/students/:id' component={singleStudent}/>
+                    <Route path='/addCampuses' exact component={CampusForm}/>
+                    <Route path='/addStudents' exact component={StudentForm}/>
                 </Fragment>
             </Router>
         )

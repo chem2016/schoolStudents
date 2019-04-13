@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import StudentForm from './studentForm'
 
 const singleStudent = ({match, students, schools, history}) => {
     const student = students.find(s=>s.id === match.params.id*1)
@@ -24,6 +25,9 @@ const singleStudent = ({match, students, schools, history}) => {
                 </div>
                 : <p>This student has not enrolled in any school yet</p>
             }
+            <div>
+                <StudentForm match={match} history={history}/>
+            </div>
         </div>
     )
 }
