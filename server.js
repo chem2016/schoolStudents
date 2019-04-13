@@ -12,7 +12,7 @@ app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html'))
 syncAndSeed()
     .then(()=>console.log('sync data for schools and students'))
 
-app.get('/api/campus', (req, res, next)=>{
+app.get('/api/campuses', (req, res, next)=>{
     Campus.findAll({
         order: [['name']]
     })
@@ -26,7 +26,32 @@ app.get('/api/students', (req, res, next)=>{
     })
     .then(students=>res.send(students))
     .catch(next)
+})
+// how to not use include?? HY
+app.get('/api/campuses/:id', (req, res, next)=>{
+    Campus.findOne({
+        id: req.params.id,
+        include: [
+            {
+                model: Student,
+            }
+        ],
+    })
+    .then(shcool=>res.send(shcool))
+    .catch(next)
+})
 
+app.get('/api/students/:id', (req, res, next)=>{
+    Student.findOne({
+        id: req.params.id,
+        include: [
+            {
+                model: Campus
+            }
+        ]
+    })
+    .then(student=>res.send(student))
+    .catch(next)
 })
 
 app.listen(port, ()=> console.log(`listening on port ${port}`))
