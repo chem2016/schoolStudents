@@ -4,15 +4,8 @@ import CampusForm from './campusForm'
 import PropTypes from 'prop-types'
 
 const SingleCampus = ({match, schools, students, history}) => {
-    // console.log('students: ', students)
     const school = schools.find(s=>s.id === match.params.id*1)
-    // console.log('school: ', school)
-    const matchStudents = students.filter(s=>s.campusId === school.id)
-    // console.log('matchStudents', matchStudents)
-    // console.log('in single campus: match', match)
-    // if(match.params.id*1 === 6){
-    //     return<p>school does not exist!!!</p>
-    // }else{
+    const matchStudents = school ? students.filter(s=>s.campusId === school.id) : []
     return (
         <div>
             {school ? 
