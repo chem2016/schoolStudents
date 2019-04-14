@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const {Campus, Student, syncAndSeed} = require('./db')
+const {Campus, Student} = require('./db/index')
+const {syncAndSeed} = require('./db/seed')
 
 const port = process.env.PORT || 3000;
 
