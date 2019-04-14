@@ -10,7 +10,7 @@ const SingleCampus = ({match, schools, students, history}) => {
         <div>
             {school ? 
                 <div className='single-school'>
-                    {school.name}
+                    <span className='school-name'>{school.name}</span>
                     <br/>
                     <img src={school.imageUrl} style={{width:100,height:100}} className="img-responsive"/>
                     <br/>

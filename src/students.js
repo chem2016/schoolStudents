@@ -21,7 +21,7 @@ const Students = ({students, schools, history, onDelete}) => {
                 return (
                     <li key={student.id}  className='list-group-item students-information'>
                         <span onClick={()=>history.push(`/students/${student.id}`)}>{`${student.firstName} ${student.lastName}`}</span>
-                        <button className='delete-student' onClick={()=>onDelete(student.id)}>X</button>
+                        <button className='delete-button' onClick={()=>onDelete(student.id)}>X</button>
                         <br/>
                         <span>{`Email: ${student.email}`}</span>
                         <br/>

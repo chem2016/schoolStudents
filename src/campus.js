@@ -9,10 +9,10 @@ const Campus = ({schools, history, onDelete}) => {
             {schools.map(school=>{
                 return (
                 <li key={school.id} className='list-group-item'>
-                    {school.name}
+                    <span className='school-name'>{school.name}</span>
                     <br/>
                     <img className='school-image img-responsive' onClick={()=>history.push(`/campuses/${school.id}`)} src={school.imageUrl} />
-                    <button className='delete-school' onClick={()=>onDelete(school.id)}>X</button>
+                    <button className='delete-button' onClick={()=>onDelete(school.id)}>X</button>
                 </li>)
             })}
         </ul>

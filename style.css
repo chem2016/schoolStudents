@@ -3,14 +3,6 @@
     height: 100px;
 }
 
-.delete-school {
-    margin: 10px
-}
-
-.delete-student {
-    margin: 10px
-}
-
 .students-information {
     padding: 10px;
     line-height: 1.8rem;
@@ -19,4 +11,14 @@
 .single-school {
     padding: 10px;
     line-height: 1.8rem;
+}
+
+.school-name {
+    font-weight: bold;
+}
+
+.delete-button {
+    margin: 10px;
+    background-color: yellow;
+    color: red;
 }
