@@ -5,10 +5,10 @@ import CampusForm from './campusForm'
 const SingleCampus = ({match, schools, students, history}) => {
     const school = schools.find(s=>s.id === match.params.id*1)
     const matchStudents = students.filter(s=>s.campusId === school.id)
-    // console.log('in single campus: match', match)
-    // if(match.params.id*1 === 5){
+    console.log('in single campus: match', match)
+    // if(match.params.id*1 === 6){
     //     return<p>school does not exist!!!</p>
-    // }
+    // }else{
     return (
         <div>
             {school ? 
@@ -25,7 +25,7 @@ const SingleCampus = ({match, schools, students, history}) => {
                 <div>
                     <ul>
                         {matchStudents.map(student=>{
-                            return(
+                            return(     
                                 <li key={student.id} onClick={()=>history.push(`/students/${student.id}`)}>
                                     {`${student.firstName} ${student.lastName}`}
                                 </li>

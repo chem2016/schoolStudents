@@ -101,9 +101,13 @@ app.put('/api/students/:id', (req, res, next)=>{
         .catch(next)
 })
 
+app.use((req, res) => {
+        res.send('404: The you are looking for does not exist!!!');
+     });
+
 app.use((error, req, res, next)=>{
     console.log('Errors from server: ', error);
-    console.log(Object.keys(error))
+    console.log('Errors from Object.keys: errors', Object.keys(error))
     let errors = [error];
     if(error.errors){
         errors = error.errors.map( error => error.message);

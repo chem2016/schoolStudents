@@ -12,23 +12,35 @@ import {fetchSchools, fetchStudents} from './store'
 
 class App extends Component{
     
+    constructor(){
+        super()
+        this.state = { isLoading: true }
+    }
+
     componentDidMount(){
         this.props.fetchData()
+        this.setState({isLoading: false})
     }
 
     render(){
         return (
             <Router>
-                <Fragment>
-                    <h1>Acme Campus and Students</h1>
-                    <Route path='/' component={Nav}/>
-                    <Route path='/campuses' exact component={Campus}/>
-                    <Route path='/students' exact component={Students}/>
-                    <Route path='/campuses/:id' render={({match, history})=>(<SingleCampus match={match} history={history}/>)}/>
-                    <Route path='/students/:id' component={singleStudent}/>
-                    <Route path='/addCampuses' exact component={CampusForm}/>
-                    <Route path='/addStudents' exact component={StudentForm}/>
-                </Fragment>
+                {this.state.loading ? 
+                    <div class="preload-title">
+                        Hold on, it's loading!
+                    </div>
+                    : 
+                    <Fragment>
+                        <h1>Acme Campus and Students</h1>
+                        <Route path='/' component={Nav}/>
+                        <Route path='/campuses' exact component={Campus}/>
+                        <Route path='/students' exact component={Students}/>
+                        <Route path='/campuses/:id' render={({match, history})=>(<SingleCampus match={match} history={history}/>)}/>
+                        <Route path='/students/:id' component={singleStudent}/>
+                        <Route path='/addCampuses' exact component={CampusForm}/>
+                        <Route path='/addStudents' exact component={StudentForm}/>
+                    </Fragment>
+                } 
             </Router>
         )
     }
