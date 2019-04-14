@@ -32,11 +32,15 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 }
-
-Campus.PropTypes = {
-    schools: PropTypes.array
+// it check the types when you pass if from props, here it is checking in the mapStateToProps function
+Campus.propTypes = {
+    schools: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        address: PropTypes.string,
+        imageUrl: PropTypes.string,
+        description: PropTypes.string
+    })),
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Campus)
 

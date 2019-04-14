@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {addStudent, updateStudent} from './store'
+import PropTypes from 'prop-types'
 
 class StudentForm extends Component{
     constructor(props){
@@ -13,8 +14,11 @@ class StudentForm extends Component{
             firstName: student ? student.firstName : '',
             lastName: student ? student.lastName : '',
             email: student ? student.email : '',
-            campusId: student ? student.campusId : '',
+            campusId: student ? 
+                student.campusId ? student.campusId : '' 
+                : '',
             gpa: student ? student.gpa : '',
+            imageUrl: student ? student.imageUrl : 'https://images.pexels.com/photos/1462631/pexels-photo-1462631.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
             errors: []
         }
     }
@@ -43,7 +47,7 @@ class StudentForm extends Component{
     }
     render(){
         const {onChange, onSave} = this
-        const {firstName, lastName, email, campusId, gpa, errors} = this.state
+        const {firstName, lastName, email, campusId, gpa, imageUrl, errors} = this.state
         const updating = this.props.student
         return(
             <form onSubmit={onSave}>
@@ -57,6 +61,7 @@ class StudentForm extends Component{
                 <input className='form-control' placeholder='email' name='email' value={email} onChange={onChange}/>
                 <input className='form-control' placeholder='campusId' name='campusId' value={campusId} onChange={onChange}/>
                 <input className='form-control' placeholder='gpa' name='gpa' value={gpa} onChange={onChange}/>
+                <input className='form-control' placeholder='imageUrl' name='imageUrl' value={imageUrl} onChange={onChange}/>
                 <div style={{ marginTop: '10px'}} className='btn-group'>
                 <button className='btn btn-primary' type='submit'>{ updating ? 'Edit' : 'Create' }</button>
                 </div>
@@ -80,6 +85,10 @@ const mapStateToProps = (state, {match}) => {
         students: state.studentsReducer,
         student
     }
+}
+
+StudentForm.propTypes = {
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentForm)

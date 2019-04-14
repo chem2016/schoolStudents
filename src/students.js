@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {deleteStudent} from './store'
+import PropTypes from 'prop-types'
 
 const Students = ({students, schools, history, onDelete}) => {
     // massage data after delete or update
@@ -46,6 +47,17 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onDelete: (id)=>dispatch(deleteStudent(id))
     }
+}
+
+Students.propTypes = {
+    students: PropTypes.arrayOf(PropTypes.shape({
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        email: PropTypes.string,
+        gpa: PropTypes.string,
+        imageUrl: PropTypes.string,
+        // campusId: PropTypes.number,
+    })),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Students)

@@ -18,7 +18,7 @@ syncAndSeed()
 app.use(express.json());
 app.get('/api/campuses', (req, res, next)=>{
     Campus.findAll({
-        order: [['name']]
+        order: [['id']]
     })
     .then(campus=>res.send(campus))
     .catch(next)

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import StudentForm from './studentForm'
+import PropTypes from 'prop-types'
 
 const singleStudent = ({match, students, schools, history}) => {
     const student = students.find(s=>s.id === match.params.id*1)
@@ -39,5 +40,20 @@ const mapStateToProps = (state) => {
     }
 }
 
+singleStudent.propTypes = {
+    schools: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        address: PropTypes.string,
+        imageUrl: PropTypes.string,
+        description: PropTypes.string,
+    })),
+    students: PropTypes.arrayOf(PropTypes.shape({
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        gpa: PropTypes.string,
+        email: PropTypes.string,
+        imageUrl:PropTypes.string
+    }))
+}
 
 export default connect(mapStateToProps)(singleStudent)

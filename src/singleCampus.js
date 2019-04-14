@@ -1,11 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import CampusForm from './campusForm'
+import PropTypes from 'prop-types'
 
 const SingleCampus = ({match, schools, students, history}) => {
+    console.log('students: ', students)
     const school = schools.find(s=>s.id === match.params.id*1)
+    console.log('school: ', school)
     const matchStudents = students.filter(s=>s.campusId === school.id)
-    console.log('in single campus: match', match)
+    console.log('matchStudents', matchStudents)
+    // console.log('in single campus: match', match)
     // if(match.params.id*1 === 6){
     //     return<p>school does not exist!!!</p>
     // }else{
@@ -45,6 +49,22 @@ const mapStateToProps = (state) =>{
         schools: state.campusReducer,
         students: state.studentsReducer    
     }
+}
+
+SingleCampus.propTypes = {
+    schools: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        address: PropTypes.string,
+        imageUrl: PropTypes.string,
+        description: PropTypes.string,
+    })),
+    students: PropTypes.arrayOf(PropTypes.shape({
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        gpa: PropTypes.string,
+        email: PropTypes.string,
+        imageUrl:PropTypes.string
+    }))
 }
 
 export default connect(mapStateToProps)(SingleCampus)

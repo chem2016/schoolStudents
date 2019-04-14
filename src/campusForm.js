@@ -84,8 +84,8 @@ const mapDispatchToProps = (dispatch, {history}) =>{
 }
 
 const mapStateToProps = (state, {match}) => {
-    console.log('state ', state)
-    console.log('match ', match)
+    // console.log('state ', state)
+    // console.log('match ', match)
     let school;
     // this if is for a hard reload
     if(match.params.id){

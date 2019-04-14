@@ -11,7 +11,7 @@ const Campus = conn.define('campus',{
     },
     imageUrl: {
         type: Sequelize.STRING,
-        defaultValue: "schoolsImageData['defaultImage']"
+        defaultValue: ""
     },
     address: {
         type: Sequelize.STRING,
@@ -49,7 +49,7 @@ const Student = conn.define('student',{
     },
     imageUrl: {
         type: Sequelize.STRING,
-        defaultValue: "studentsImageData['defaultImage']"
+        defaultValue: ""
     },
     gpa: {
         type: Sequelize.DECIMAL,
