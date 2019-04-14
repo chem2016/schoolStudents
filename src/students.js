@@ -28,13 +28,21 @@ const Students = ({students, schools, history, onDelete}) => {
                         <span>{`GPA: ${student.gpa}`}</span>
                         <br/>
                         <img src={student.imageUrl} style={{width:100,height:100}} className="img-responsive"/>
-                        <p>{`From Campus ${student.campusId}`}</p>
-                        
+                        <p>{`From Campus ${student.campusId ? schools.find(school=>school.id===student.campusId).name : 'null' }`}</p>
                     </li>)
             })}
         </ul>
     )
 }
+
+// findStudentCampus = (student) =>{
+//     console.log('students: ', student)
+//     console.log('schools: ', this.props.schools)
+//     const Campus = this.props.schools.find(school=>school.id === student.campusId)
+//     console.log(Campus)
+//     return Campus.name
+// }
+
 
 const mapStateToProps = (state)=> {
     return {
