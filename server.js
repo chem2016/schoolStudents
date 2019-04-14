@@ -35,11 +35,11 @@ app.get('/api/students', (req, res, next)=>{
 app.get('/api/campuses/:id', (req, res, next)=>{
     Campus.findOne({
         id: req.params.id,
-        include: [
-            {
-                model: Student,
-            }
-        ],
+        // include: [
+        //     {
+        //         model: Student,
+        //     }
+        // ],
     })
     .then(shcool=>res.send(shcool))
     .catch(next)
@@ -48,11 +48,11 @@ app.get('/api/campuses/:id', (req, res, next)=>{
 app.get('/api/students/:id', (req, res, next)=>{
     Student.findOne({
         id: req.params.id,
-        include: [
-            {
-                model: Campus
-            }
-        ]
+        // include: [
+        //     {
+        //         model: Campus
+        //     }
+        // ]
     })
     .then(student=>res.send(student))
     .catch(next)

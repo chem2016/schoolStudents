@@ -2,10 +2,21 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {deleteStudent} from './store'
 
-const Students = ({students, history, onDelete}) => {
+const Students = ({students, schools, history, onDelete}) => {
+    // massage data after delete or update
+    const schoolsToShow = schools.filter(s=>s.id)
+    const studentsToShow = students.map(student=>{
+        let schoolId = student.campusId
+        if(schoolsToShow.find(s=>s.id === schoolId)){
+            return student
+        }else{
+            student.campusId = null
+            return student
+        }
+    })
     return (
         <ul className='list-group'>
-            {students.map(student=>{
+            {studentsToShow.map(student=>{
                 return (
                     <li key={student.id}  className='list-group-item'>
                         <span onClick={()=>history.push(`/students/${student.id}`)}>{`${student.firstName} ${student.lastName}`}</span>
@@ -26,7 +37,8 @@ const Students = ({students, history, onDelete}) => {
 
 const mapStateToProps = (state)=> {
     return {
-      students: state.studentsReducer
+      students: state.studentsReducer, 
+      schools: state.campusReducer
     };
   };
 

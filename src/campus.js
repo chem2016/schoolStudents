@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {deleteCampus} from './store'
+import PropTypes from 'prop-types'
 
 const Campus = ({schools, history, onDelete}) => {
     return (
@@ -20,14 +21,22 @@ const Campus = ({schools, history, onDelete}) => {
 
 const mapStateToProps = (state)=> {
     return {
-      schools: state.campusReducer   // questions HY ??
+      schools: state.campusReducer,   // questions HY ??
+      students: state.studentsReducer
     };
   };
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDelete: (id)=>dispatch(deleteCampus(id))
+        onDelete: (id)=>{
+            return dispatch(deleteCampus(id))
+        }
     }
 }
+
+Campus.PropTypes = {
+    schools: PropTypes.array
+}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Campus)
 
