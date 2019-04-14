@@ -4,13 +4,13 @@ import {deleteCampus} from './store'
 
 const Campus = ({schools, history, onDelete}) => {
     return (
-        <ul>
+        <ul className='list-group'>
             {schools.map(school=>{
                 return (
-                <li key={school.id}>
+                <li key={school.id} className='list-group-item'>
+                    {/* <br/> */}
+                    <img className='school-image img-responsive' onClick={()=>history.push(`/campuses/${school.id}`)} src={school.imageUrl} />
                     {school.name}
-                    <br/>
-                    <img onClick={()=>history.push(`/campuses/${school.id}`)} src={school.imageUrl} style={{width:100,height:100}} className="img-responsive"/>
                     <button onClick={()=>onDelete(school.id)}>X</button>
                 </li>)
             })}

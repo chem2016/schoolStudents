@@ -10,6 +10,8 @@ app.get('/app.js', (req, res, next)=> res.sendFile(path.join(__dirname, 'dist', 
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
+app.get('/style.css', (req, res, next)=> res.sendFile(path.join(__dirname, 'style.css')) )
+
 syncAndSeed()
     .then(()=>console.log('sync data for schools and students'))
 

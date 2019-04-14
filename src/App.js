@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import {HashRouter as Router, Route} from 'react-router-dom'
+import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Nav from './nav'
 import Campus from './campus'
@@ -8,6 +8,7 @@ import SingleCampus from './singleCampus'
 import singleStudent from './singleStudent'
 import CampusForm from './campusForm'
 import StudentForm from './studentForm'
+import ErrorPage from './ErrorPage'
 import {fetchSchools, fetchStudents} from './store'
 
 class App extends Component{
@@ -33,12 +34,15 @@ class App extends Component{
                     <Fragment>
                         <h1>Acme Campus and Students</h1>
                         <Route path='/' component={Nav}/>
-                        <Route path='/campuses' exact component={Campus}/>
-                        <Route path='/students' exact component={Students}/>
-                        <Route path='/campuses/:id' render={({match, history})=>(<SingleCampus match={match} history={history}/>)}/>
-                        <Route path='/students/:id' component={singleStudent}/>
-                        <Route path='/addCampuses' exact component={CampusForm}/>
-                        <Route path='/addStudents' exact component={StudentForm}/>
+                        <Switch>
+                            <Route path='/campuses' exact component={Campus}/>
+                            <Route path='/students' exact component={Students}/>
+                            <Route path='/campuses/:id' render={({match, history})=>(<SingleCampus match={match} history={history}/>)}/>
+                            <Route path='/students/:id' component={singleStudent}/>
+                            <Route path='/addCampuses' exact component={CampusForm}/>
+                            <Route path='/addStudents' exact component={StudentForm}/>
+                            <Route component={ErrorPage}/>
+                        </Switch>
                     </Fragment>
                 } 
             </Router>

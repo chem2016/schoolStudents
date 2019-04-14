@@ -83,6 +83,7 @@ export const deleteCampus = (id) => {
     return (dispatch) => {
         return axios.delete(`/api/campuses/${id}`)
             .then(()=>dispatch(fetchSchools()))
+            // .then(()=>dispatch(fetchStudents()))
     }
 }
 
