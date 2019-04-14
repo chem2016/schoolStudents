@@ -19,9 +19,9 @@ const Students = ({students, schools, history, onDelete}) => {
         <ul className='list-group'>
             {studentsToShow.map(student=>{
                 return (
-                    <li key={student.id}  className='list-group-item'>
+                    <li key={student.id}  className='list-group-item students-information'>
                         <span onClick={()=>history.push(`/students/${student.id}`)}>{`${student.firstName} ${student.lastName}`}</span>
-                        <button onClick={()=>onDelete(student.id)}>X</button>
+                        <button className='delete-student' onClick={()=>onDelete(student.id)}>X</button>
                         <br/>
                         <span>{`Email: ${student.email}`}</span>
                         <br/>
@@ -34,15 +34,6 @@ const Students = ({students, schools, history, onDelete}) => {
         </ul>
     )
 }
-
-// findStudentCampus = (student) =>{
-//     console.log('students: ', student)
-//     console.log('schools: ', this.props.schools)
-//     const Campus = this.props.schools.find(school=>school.id === student.campusId)
-//     console.log(Campus)
-//     return Campus.name
-// }
-
 
 const mapStateToProps = (state)=> {
     return {
@@ -64,7 +55,6 @@ Students.propTypes = {
         email: PropTypes.string,
         gpa: PropTypes.string,
         imageUrl: PropTypes.string,
-        // campusId: PropTypes.number,
     })),
 }
 

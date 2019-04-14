@@ -67,7 +67,6 @@ class StudentForm extends Component{
                 <input className='form-control' placeholder='firstName' name='firstName' value={firstName} onChange={onChange}/>
                 <input className='form-control' placeholder='lastName' name='lastName' value={lastName} onChange={onChange}/>
                 <input className='form-control' placeholder='email' name='email' value={email} onChange={onChange}/>
-                {/* <input className='form-control' placeholder='campusId' name='campusId' value={campusId} onChange={onChange}/> */}
                 <input className='form-control' placeholder='gpa' name='gpa' value={gpa} onChange={onChange}/>
                 <input className='form-control' placeholder='imageUrl' name='imageUrl' value={imageUrl} onChange={onChange}/>
                 <select name='campus' className='form-control' value= {campus} onChange={onChange}>
@@ -105,7 +104,19 @@ const mapStateToProps = (state, {match}) => {
 }
 
 StudentForm.propTypes = {
-
+    schools: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        address: PropTypes.string,
+        imageUrl: PropTypes.string,
+        description: PropTypes.string,
+    })),
+    students: PropTypes.arrayOf(PropTypes.shape({
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        gpa: PropTypes.string,
+        email: PropTypes.string,
+        imageUrl:PropTypes.string
+    }))
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentForm)

@@ -9,10 +9,10 @@ const Campus = ({schools, history, onDelete}) => {
             {schools.map(school=>{
                 return (
                 <li key={school.id} className='list-group-item'>
-                    {/* <br/> */}
-                    <img className='school-image img-responsive' onClick={()=>history.push(`/campuses/${school.id}`)} src={school.imageUrl} />
                     {school.name}
-                    <button onClick={()=>onDelete(school.id)}>X</button>
+                    <br/>
+                    <img className='school-image img-responsive' onClick={()=>history.push(`/campuses/${school.id}`)} src={school.imageUrl} />
+                    <button className='delete-school' onClick={()=>onDelete(school.id)}>X</button>
                 </li>)
             })}
         </ul>
@@ -21,7 +21,7 @@ const Campus = ({schools, history, onDelete}) => {
 
 const mapStateToProps = (state)=> {
     return {
-      schools: state.campusReducer,   // questions HY ??
+      schools: state.campusReducer,   
       students: state.studentsReducer
     };
   };

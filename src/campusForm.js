@@ -12,7 +12,7 @@ class CampusForm extends Component{
         return {
             name: school ? school.name : '',
             address: school ? school.address : '',
-            imageUrl: school ? school.imageUrl : '',
+            imageUrl: school ? school.imageUrl : 'https://www.umass.edu/gateway/sites/default/files/CampusGallery_3.jpg',
             description: school ? school.description :'',
             errors: []
         }
@@ -24,12 +24,11 @@ class CampusForm extends Component{
     }
 
 
-    onChange=(ev)=>this.setState({[ev.target.name]: ev.target.value},()=>console.log(this.state))
+    onChange=(ev)=>this.setState({[ev.target.name]: ev.target.value})
     onSave=(ev)=>{
         ev.preventDefault();
         const school = {...this.state}
         delete school.errors
-        console.log('in onSave: ', this.props)
         if(this.props.school){
             school.id = this.props.school.id;
         }
@@ -67,7 +66,7 @@ class CampusForm extends Component{
                 <input className='form-control' placeholder='imageUrl' name='imageUrl' value={imageUrl} onChange={onChange}/>
                 <input className='form-control' placeholder='description' name='description' value={description} onChange={onChange}/>
                 <div style={{ marginTop: '10px'}} className='btn-group'>
-                <button className='btn btn-primary' type='submit'>{ updating ? 'Edit' : ' Create ' }</button>
+                <button className='btn btn-primary' type='submit'>{ updating ? 'Save' : ' Create ' }</button>
                 </div>
             </form>
         )

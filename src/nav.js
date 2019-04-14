@@ -4,9 +4,6 @@ import {Link} from 'react-router-dom'
 
 const Nav = ({location: {pathname}}) => {
     const links = [
-        // {
-        //     to: '/', label: 'Home'
-        // },
         {
             to: '/campuses', label: 'Campus'
         },

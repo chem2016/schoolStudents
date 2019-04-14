@@ -3,3 +3,15 @@
     height: 100px;
 }
 
+.delete-school {
+    margin: 10px
+}
+
+.delete-student {
+    margin: 10px
+}
+
+.students-information {
+    padding: 20px;
+    line-height: 1.8rem;
+}
