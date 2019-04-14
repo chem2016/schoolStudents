@@ -9,7 +9,7 @@ const singleStudent = ({match, students, schools, history}) => {
     return (
         <div>
             {student? 
-                <div>
+                <div className = 'students-information'>
                     {`${student.firstName} ${student.lastName}`}
                     <br/>
                     {student.email}
@@ -18,7 +18,7 @@ const singleStudent = ({match, students, schools, history}) => {
                     <br/>
                     {student.gpa}
                 </div>
-                : null
+                : <p>This student does not exist!</p>
             }
             {currentSchool?
                 <div onClick={()=>history.push(`/campuses/${currentSchool.id}`)}>

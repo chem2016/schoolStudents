@@ -9,7 +9,7 @@ const SingleCampus = ({match, schools, students, history}) => {
     return (
         <div>
             {school ? 
-                <div>
+                <div className='single-school'>
                     {school.name}
                     <br/>
                     <img src={school.imageUrl} style={{width:100,height:100}} className="img-responsive"/>
@@ -17,7 +17,7 @@ const SingleCampus = ({match, schools, students, history}) => {
                     <p>{school.address}</p>
                     <p>{school.description}</p>
                 </div>
-                : null}
+                : <p>This school does not exist!</p>}
             {matchStudents.length ?
                 <div>
                     <ul>
@@ -30,7 +30,7 @@ const SingleCampus = ({match, schools, students, history}) => {
                         })}
                     </ul>
                 </div>
-                : <p>This school currently has no students</p>
+                : <p>This school currently has no students!</p>
             }
             <div><CampusForm match={match} history={history}/></div>
         </div>

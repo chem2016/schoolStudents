@@ -12,6 +12,11 @@
 }
 
 .students-information {
-    padding: 20px;
+    padding: 10px;
+    line-height: 1.8rem;
+}
+
+.single-school {
+    padding: 10px;
     line-height: 1.8rem;
 }
